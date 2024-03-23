@@ -47,11 +47,13 @@ def tokenize(tokenizer, text):
     # tokenize
     if tokenizer == 'stanza-custom':
         doc = tagger(text)
-        pos_tuple_all = [
-            (word.lemma.split('+'), word.xpos.split('+'))
-            for sent in doc.sentences
-            for word in sent.words
-        ]
+        pos_tuple_all = []
+        for sent in doc.sentences:
+            for word in sent.words:
+                lemmas = word.lemma.split('+')
+                xpos = word.xpos.split('+')
+                for l, x in zip(lemmas, xpos):
+                    pos_tuple_all.append((l, x))
     else:
         raise ValueError("tokenizer must be 'stanza-custom'")
 
