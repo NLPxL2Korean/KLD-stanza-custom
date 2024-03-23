@@ -47,10 +47,13 @@ def tokenize(tokenizer, text):
     # tokenize
     if tokenizer == 'stanza-custom':
         doc = tagger(text)
-        # Extract lemma and xpos for each word in each sentence
-        pos_tuple_all = [(word.lemma, word.xpos) for sent in doc.sentences for word in sent.words]
+        pos_tuple_all = [
+            (word.lemma.split('+'), word.xpos.split('+'))
+            for sent in doc.sentences
+            for word in sent.words
+        ]
     else:
-        raise ValueError("tokenizer must be stanza-custom")
+        raise ValueError("tokenizer must be 'stanza-custom'")
 
     # remove stopwords
     pos_tuple_cleaned = remove_pos(pos_tuple_all, pos_list=stopwords)
