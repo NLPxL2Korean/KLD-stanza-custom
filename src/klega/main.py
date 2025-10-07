@@ -10,7 +10,10 @@ import sys
 
 from util import current_time_as_str
 
-warnings.filterwarnings("ignore", message=np.VisibleDeprecationWarning)
+warnings.filterwarnings(
+    "ignore",
+    message=r".*Creating an ndarray from ragged nested sequences.*"
+)
 logging.basicConfig(level=logging.INFO)
 logging.getLogger("tensorflow").setLevel(logging.CRITICAL)
 logging.getLogger("stanza").setLevel(logging.WARNING)
