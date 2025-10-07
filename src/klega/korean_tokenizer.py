@@ -36,8 +36,12 @@ def tokenize(tokenizer, text):
     """
 
     if tokenizer == 'stanza-custom':
-        tagger = stanza.Pipeline(lang='ko', package='gsd',
-                                 processors='tokenize,pos,lemma,depparse', package='gsd')
+        tagger = stanza.Pipeline(
+            lang='ko',
+            dir='./custom-model',
+            processors='tokenize,pos,lemma,depparse',
+            package='gsd'
+        )
         stopwords = STOPWORDS
     else:
         raise ValueError("tokenizer must be stanza-custom")
